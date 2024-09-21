@@ -92,8 +92,10 @@ while game_on:
         game_on = False
         break
 
-    #Start new round
+    #Start new round1
     player_one_cards = [] #Current card in play at the table
     player_one_cards.append(player_one.remove_one())
     player_two_cards = []
     player_one_cards.append(player_one.remove_one())
+
+    lol
