@@ -96,7 +96,7 @@ while game_on:
     player_one_cards = [] #Current card in play at the table
     player_one_cards.append(player_one.remove_one())
     player_two_cards = []
-    player_one_cards.append(player_one.remove_one())
+    player_two_cards.append(player_two.remove_one())
 
     at_war = True
     #Comparing cards to see if P1 won.
@@ -106,9 +106,15 @@ while game_on:
             player_one.add_cards(player_two_cards)
 
             at_war = False
-        if player_one_cards[-1].value < player_two_cards[-1].value:
+        #Comparing cards to see if P2 won.
+        elif player_one_cards[-1].value < player_two_cards[-1].value:
             player_two.add_cards(player_one_cards)
             player_two.add_cards(player_two_cards)
+
+            at_war=False
+
+        #Checking to see if both players can draw 5 cards, 
+        #if they have 5 cards on their stack
         else:
 
             print("War!")
@@ -122,7 +128,8 @@ while game_on:
                 print("Player 1 wins!")
                 game_on = False
                 break
+    #Add 5 cards to their hand
     else:
         for num in range(5):
-            player_one_cards.append(player_one.remove_one())
-            player_two_cards.append(player_two_cards.remove_one())
+                player_one_cards.append(player_one.remove_one())
+                player_two_cards.append(player_two.remove_one())
