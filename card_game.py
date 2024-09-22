@@ -102,16 +102,16 @@ while game_on:
     #Comparing cards to see if P1 won.
     while at_war:
         if player_one_cards[-1].value > player_two_cards[-1].value:
-            player_one.add_cards(player_one_cards)
-            player_one.add_cards(player_two_cards)
+                player_one.add_cards(player_one_cards)
+                player_one.add_cards(player_two_cards)
 
-            at_war = False
+                at_war = False
         #Comparing cards to see if P2 won.
         elif player_one_cards[-1].value < player_two_cards[-1].value:
-            player_two.add_cards(player_one_cards)
-            player_two.add_cards(player_two_cards)
+                player_two.add_cards(player_one_cards)
+                player_two.add_cards(player_two_cards)
 
-            at_war=False
+                at_war=False
 
         #Checking to see if both players can draw 5 cards, 
         #if they have 5 cards on their stack
