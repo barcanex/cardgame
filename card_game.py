@@ -98,4 +98,4 @@ while game_on:
     player_two_cards = []
     player_one_cards.append(player_one.remove_one())
 
-    lol
+    print("helo")
