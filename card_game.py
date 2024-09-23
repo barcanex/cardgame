@@ -65,7 +65,7 @@ class Player:
 
 
 player_one = Player("One")
-player_two = Player("TWo")
+player_two = Player("Two")
 
 new_deck = Deck()
 new_deck.shuffle()
@@ -80,13 +80,14 @@ round_num = 0
 
 while game_on:
 
-    round_num +=1
+    round_num += 1
     print(f"Round {round_num}")
 
     if len(player_one.all_cards) == 0:
         print("Player One, out of cards! Player Two wins!")
         game_on = False
         break
+
     if len(player_two.all_cards) == 0:
         print("Player Two, out of cards! Player One wins!")
         game_on = False
@@ -95,6 +96,7 @@ while game_on:
     #Start new round1
     player_one_cards = [] #Current card in play at the table
     player_one_cards.append(player_one.remove_one())
+    
     player_two_cards = []
     player_two_cards.append(player_two.remove_one())
 
@@ -129,7 +131,7 @@ while game_on:
                 game_on = False
                 break
     #Add 5 cards to their hand
-    else:
-        for num in range(5):
-                player_one_cards.append(player_one.remove_one())
-                player_two_cards.append(player_two.remove_one())
+            else:
+                for num in range(5):
+                    player_one_cards.append(player_one.remove_one())
+                    player_two_cards.append(player_two.remove_one())
