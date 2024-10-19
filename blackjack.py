@@ -39,7 +39,40 @@ class Deck():
 
     def deal(self):
         single_card = self.deck.pop()
+        return single_card
 
+class Hand():
 
-test_deck=Deck()
-print(test_deck)
+    def __init__(self):
+        self.cards =[] 
+        self.value = 0 #Player starts with 0 value
+        self.aces = 0 #Cause they are special occasion
+    
+    def add_card(self,card):#from Deck.deal(), we ll grab a card from Deck
+        self.cards.append(card)
+        self.value += values[card.rank]
+
+        if card.rank == "Ace":
+            self.aces += 1
+    
+    def adjust_for_ace(self):
+        while self.value > 21 and self.aces:
+            self.value -= 10
+            self.aces -= 1 
+            pass
+    
+test_deck = Deck()
+test_deck.shuffle()
+
+#Player
+test_player = Hand()#Creating Hand
+pulled_card = test_deck.deal()#Drawing card from Deck
+print('First card = ',pulled_card)
+test_player.add_card(pulled_card)#Add card to player's hand
+print('First hand value = ', test_player.value)
+pulled_card_two = test_deck.deal()#Drawing second card
+print('Second card = ', pulled_card_two)
+test_player.add_card(pulled_card_two)
+print('Second hand value = ', test_player.value)
+
+        
