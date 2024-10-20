@@ -83,15 +83,22 @@ def take_bet(chips):
         except:
             print("Error.Please provide an integer.")
         else:
-            if chips.bet > chips.total:
+            if chips.bet > chips.total :
                 print("Error, exceeded limit. You have : {}".format(chips.total))
-#Hit
+            elif chips.bet <= 0 :
+                print("Negative or 0 value detected. Please try again")
+            else:
+                print(f"\nBet : {chips.bet} chips.")
+                break
+#Hit0
+
 def hit(deck,hand):
 
     single_card = deck.deal()
     hand.add_card(single_card)
     hand.adjust_for_ace
 #Hit or stand
+
 def hit_or_stand():
     global playing
 
@@ -132,6 +139,7 @@ def show_all(player,dealer):
         print(card)
     print(f"Value of Dealer's hand is {dealer.value}")
 #Result
+
 def player_busts(player,dealer,chips):
     print("Bust Player!")
     chips.lose_bet()
@@ -163,10 +171,31 @@ Dealer = Hand()
 
 for x in range(2):
     Player1.add_card(test_deck.deal())
+    Player1.adjust_for_ace()
     Dealer.add_card(test_deck.deal())
-    
-#Show cards
+    Dealer.adjust_for_ace()
+
+#Bet chips
+Pchips = Chips()
+take_bet(Pchips)
+
+#Show initial cards
 show_some(Player1,Dealer)
 
+while Playing:
+
+    #Prompt for Player to Hit or Stand
+    hit_or_stand(test_deck,Player1)
+    Player1.adjust_for_ace()
+
+    #Show cards again (keep dealer hidden)
+    show_some(Player1,Dealer)
+
+    #Check player's cards sum
+
+    if Player1.value > 21  :
+        player_busts(Player1,Dealer,Pchips)
+    
+    break
 
         
