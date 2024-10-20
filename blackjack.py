@@ -59,6 +59,8 @@ class Hand():
         while self.value > 21 and self.aces:
             self.value -= 10
             self.aces -= 1 
+
+#Creating chips , giving chips according to win_bet,lose_bet            
 class Chips():
 
     def __init__(self,total=100):
@@ -71,19 +73,100 @@ class Chips():
     def lose_bet(self):
         self.total -= self.bet
 
+#Taking bets function
 
+def take_bet(chips):
+    
+    while True:
+        try:
+            chips.bet= int(input ("How many chips would you like to bet? "))
+        except:
+            print("Error.Please provide an integer.")
+        else:
+            if chips.bet > chips.total:
+                print("Error, exceeded limit. You have : {}".format(chips.total))
+#Hit
+def hit(deck,hand):
+
+    single_card = deck.deal()
+    hand.add_card(single_card)
+    hand.adjust_for_ace
+#Hit or stand
+def hit_or_stand():
+    global playing
+
+    while True:
+        x = input("Hit or Stand? Enter H or S ")
+
+        if x[0].lower() == 'h':
+            hit(deck,hand)
+        elif x[0].lower() == 's':
+            print("Player Stands, dealer's turn")
+            playing = False
+        else:
+            print("Sorry please try again")
+            continue
+        break
+#Show some cards beginning
+def show_some(player,dealer):
+    #Show only One of the dealer's cards
+    print("\n Dealer's Hand: ")
+    print("First card hidden!")
+    print(dealer.cards[1])
+    #Show all (2 cards) of the player's hand/cards
+    print("\n Player's Hand: ")
+    for card in player.cards:
+        print(card)
+#Show all cards
+def show_all(player,dealer):
+
+    #Show all the dealer's cards
+    print("\n Dealer's Hand: ")
+    for card in player.cards:
+        print(card)
+    #calculate and disp value (J+K == 20)
+    print(f"Value of Dealer's hand is {dealer.value}")
+    #Show all the player's cards
+    print("\n Player's Hand: ")
+    for card in player.cards:
+        print(card)
+    print(f"Value of Dealer's hand is {dealer.value}")
+#Result
+def player_busts(player,dealer,chips):
+    print("Bust Player!")
+    chips.lose_bet()
+
+def player_wins(player,dealer,chips):
+    print("Player wins!")
+    chips.win_bet()
+
+def dealer_busts(player,dealer,chips):
+    print("Player wins!")
+    chips.win_bet()
+
+def dealer_wins(player,dealer,chips):
+    print("Dealer wins!")
+    chips.lose_bet()
+
+def push(player,dealer):#TIE
+    print("Delaer and player tie!")
+
+#Create & Shuffle Deck
 test_deck = Deck()
 test_deck.shuffle()
 
-#Player
-test_player = Hand()#Creating Hand
-pulled_card = test_deck.deal()#Drawing card from Deck
-print('First card = ',pulled_card)
-test_player.add_card(pulled_card)#Add card to player's hand
-print('First hand value = ', test_player.value)
-pulled_card_two = test_deck.deal()#Drawing second card
-print('Second card = ', pulled_card_two)
-test_player.add_card(pulled_card_two)
-print('Second hand value = ', test_player.value)
+#Create each player's hand with nothing
+Player1 = Hand()
+Dealer = Hand()
+
+#Add cards to their hand
+
+for x in range(2):
+    Player1.add_card(test_deck.deal())
+    Dealer.add_card(test_deck.deal())
+    
+#Show cards
+show_some(Player1,Dealer)
+
 
         
